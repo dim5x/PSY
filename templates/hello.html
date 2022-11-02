@@ -15,13 +15,23 @@
                 <div class="range-slider">
                     <input type="text" class="js-range-slider" value=""/>
                 </div>
+                <br>
+                <div>
+                    <input type="radio" id="contactChoice1"
+                           name="contact" value="email" checked>
+                    <label for="contactChoice1">Слова</label>
+
+                    <input type="radio" id="contactChoice2"
+                           name="contact" value="phone">
+                    <label for="contactChoice2">Текст</label>
+                </div>
 
             </td>
             <td>
                 <form method="POST">
                     <label>
                         <textarea id='input' rows="10" cols="60" name="text"
-                                  placeholder="&nbsp; Insert text ..."></textarea>
+                                  placeholder="&nbsp; Insert text ...">Ежик бежал по лесу. И заблудился.</textarea>
                     </label>
 
                 </form>
@@ -33,8 +43,10 @@
     <table>
         <tr>
             <td>
-                <textarea id="output" rows="10" cols="60" name="text" placeholder="&nbsp; "></textarea>
+                {#                <textarea id="output" rows="10" cols="60" name="text" placeholder="&nbsp; "></textarea>#}
+                <div id='output' contenteditable="true"></div>
             </td>
+
 
     </table>
 </div>

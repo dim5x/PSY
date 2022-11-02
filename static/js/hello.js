@@ -32,19 +32,41 @@ $range.ionRangeSlider({
         let min = data['from_pretty'];
         let max = data['to_pretty'];
         let output_text = '';
-        let input_text = $('#input').val().toUpperCase()
-        input_text = input_text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\n '"]/g, "");
+        let input_text = $('#input').val()
 
-        for (let i = 0; i < input_text.length; i++) {
-            let fragment = '';
-            for (let i = 0; i < getRandomIntInclusive(min, max); i++) {
-                fragment = fragment + arrayRandElement(alpabet);
+
+        if ($('#contactChoice1').is(':checked')) {
+            input_text = input_text.toUpperCase();
+            input_text = input_text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\n'"]/g, "");
+            console.log(input_text)
+            for (let i = 0; i < input_text.length; i++) {
+                let fragment = '';
+                for (let i = 0; i < getRandomIntInclusive(min, max); i++) {
+                    fragment = fragment + arrayRandElement(alpabet);
+                }
+                output_text += input_text[i] + '<fr>' + fragment + '</fr>';
             }
-            output_text += input_text[i] + fragment;
+            console.log(output_text);
+            $('#output').html(output_text + '.'); // for textarea
+        } else {
+            input_text = input_text.replace(/[\n]/g, "");
+            input_text = input_text.split(' ');
+            console.log('input_text =', input_text)
+            for (let i = 0; i < input_text.length; i++) {
+                let fragment = '';
+                for (let i = 0; i < getRandomIntInclusive(min, max); i++) {
+                    fragment = fragment + arrayRandElement(alpabet);
+                }
+                if (input_text[i].length <= 2) {
+                    input_text[i] = '<i>' + input_text[i] + '</i>'
+                }
+                output_text += input_text[i] + fragment;
+            }
+            console.log(output_text);
+            $('#output').html(output_text); // for textarea
+
+
         }
-        console.log(output_text);
-        $('#output').val(output_text + '.'); // for textarea
-        // $('#output').text(output_text + '.') // for span
     }
 });
 
@@ -56,16 +78,38 @@ $('#input').on('input', function () {
     let max = instance['result']['to'];
     let output_text = '';
     let input_text = $('#input').val().toUpperCase()
-    input_text = input_text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\n '"]/g, "");
+    input_text = input_text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\n'"]/g, "");
 
-    for (let i = 0; i < input_text.length; i++) {
-        let fragment = '';
-        for (let i = 0; i < getRandomIntInclusive(min, max); i++) {
-            fragment = fragment + arrayRandElement(alpabet);
+    if ($('#contactChoice1').is(':checked')) {
+        let input_text = $('#input').val().toUpperCase();
+        input_text = input_text.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()\n'"]/g, "");
+        for (let i = 0; i < input_text.length; i++) {
+            let fragment = '';
+            for (let i = 0; i < getRandomIntInclusive(min, max); i++) {
+                fragment = fragment + arrayRandElement(alpabet);
+            }
+            // output_text += input_text[i] + fragment;
+            output_text += input_text[i] + '<fr>' + fragment + '</fr>';
         }
-        output_text += input_text[i] + fragment;
+        console.log(output_text);
+        $('#output').html(output_text + '.');
+        // $('#output').text(output_text + '.') // for span
+    } else {
+        let input_text = $('#input').val()
+        input_text = input_text.replace(/[\\n]/g, "");
+        input_text = input_text.split(' ')
+        for (let i = 0; i < input_text.length; i++) {
+            let fragment = '';
+            for (let i = 0; i < getRandomIntInclusive(min, max); i++) {
+                fragment = fragment + arrayRandElement(alpabet);
+            }
+            // output_text += input_text[i] + fragment;
+            if (input_text[i].length <= 2) {
+                input_text[i] = '<i>' + input_text[i] + '</i>'
+            }
+            output_text += input_text[i] + fragment;
+        }
+        console.log(output_text);
+        $('#output').html(output_text + '.');
     }
-    console.log(output_text);
-    $('#output').val(output_text + '.');
-    // $('#output').text(output_text + '.') // for span
 });
